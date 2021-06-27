@@ -1,0 +1,15 @@
+package <%= packageName %>.<%= aggregateName %>.domain.model.commands;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class Create<%= aggregateUpperName %>Command {
+    private String <%= aggregateName %>Id;
+    private String <%= aggregateName %>Name;
+    
+    public Create<%= aggregateUpperName %>Command(String <%= aggregateName %>Name) {
+        this.<%= aggregateName %>Name = <%= aggregateName %>Name;
+    }
+}

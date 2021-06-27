@@ -1,0 +1,16 @@
+package <%= packageName %>.<%= aggregateName %>.infrastructure.repositories.jpa;
+
+import <%= packageName %>.<%= aggregateName %>.domain.model.aggregates.<%= aggregateUpperName %>;
+import <%= packageName %>.<%= aggregateName %>.domain.service.<%= aggregateUpperName %>Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface <%= aggregateUpperName %>JPARepository extends <%= aggregateUpperName %>Repository, JpaRepository<<%= aggregateUpperName %>, Long> {
+    <%= aggregateUpperName %> save(<%= aggregateUpperName %> <%= aggregateName %>);
+    Optional<<%= aggregateUpperName %>> findByCreate<%= aggregateUpperName %>IdCreate<%= aggregateUpperName %>Id(String create<%= aggregateUpperName %>Id);
+    List<<%= aggregateUpperName %>> findAll();
+}

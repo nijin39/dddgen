@@ -1,0 +1,17 @@
+package <%= packageName %>.<%= aggregateName %>.domain.model.aggregates;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Embeddable
+@Getter
+public class Create<%= aggregateUpperName %>Id {
+    @Column(name="create_<%= aggregateName %>_id")
+    private String create<%= aggregateUpperName %>Id;
+}

@@ -1,0 +1,52 @@
+package <%= packageName %>.<%= aggregateName %>.interfaces.rest;
+
+import <%= packageName %>.<%= aggregateName %>.application.internal.commandservices.<%= aggregateUpperName %>CommandService;
+import <%= packageName %>.<%= aggregateName %>.application.internal.queryservices.<%= aggregateUpperName %>QueryService;
+import <%= packageName %>.<%= aggregateName %>.domain.model.aggregates.Create<%= aggregateUpperName %>Id;
+import <%= packageName %>.<%= aggregateName %>.domain.model.aggregates.<%= aggregateUpperName %>;
+import <%= packageName %>.<%= aggregateName %>.interfaces.rest.dto.Create<%= aggregateUpperName %>Resource;
+import <%= packageName %>.<%= aggregateName %>.interfaces.rest.transform.Create<%= aggregateUpperName %>CommandDTOAssembler;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@Slf4j
+@RestController
+public class <%= aggregateUpperName %>RestController {
+
+    private <%= aggregateUpperName %>CommandService <%= aggregateName %>CommandService;
+    private <%= aggregateUpperName %>QueryService <%= aggregateName %>QueryService;
+
+    public <%= aggregateUpperName %>RestController(<%= aggregateUpperName %>CommandService <%= aggregateName %>CommandService, <%= aggregateUpperName %>QueryService <%= aggregateName %>QueryService) {
+        this.<%= aggregateName %>CommandService = <%= aggregateName %>CommandService;
+        this.<%= aggregateName %>QueryService = <%= aggregateName %>QueryService;
+    }
+
+    @PostMapping("/<%= aggregateName %>")
+    public Create<%= aggregateUpperName %>Id create<%= aggregateUpperName %>(@RequestBody Create<%= aggregateUpperName %>Resource create<%= aggregateUpperName %>Resource) {
+        Create<%= aggregateUpperName %>Id create<%= aggregateUpperName %>Id = <%= aggregateName %>CommandService.create<%= aggregateUpperName %>(
+        Create<%= aggregateUpperName %>CommandDTOAssembler.toCommandFromDTO(create<%= aggregateUpperName %>Resource));
+        return create<%= aggregateUpperName %>Id;
+    }
+
+    @GetMapping("/<%= aggregateName %>")
+    public <%= aggregateUpperName %> findByCreate<%= aggregateUpperName %>Id(@RequestParam String create<%= aggregateUpperName %>Id) throws Exception {
+        return <%= aggregateName %>QueryService.findByCreate<%= aggregateUpperName %>Id(create<%= aggregateUpperName %>Id);
+    }
+
+    @GetMapping("/<%= aggregateName %>s")
+    public List<<%= aggregateUpperName %>> getAll<%= aggregateUpperName %>s() {
+        return <%= aggregateName %>QueryService.findAll();
+    }
+
+    @PutMapping("/<%= aggregateName %>")
+    public String update<%= aggregateUpperName %>() {
+        return "<%= aggregateName %>s";
+    }
+
+    @DeleteMapping("/<%= aggregateName %>/{<%= aggregateName %>Id}")
+    public String delete<%= aggregateUpperName %>(@PathVariable String <%= aggregateName %>Id) {
+        return "<%= aggregateName %>s";
+    }
+}

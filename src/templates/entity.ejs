@@ -1,0 +1,32 @@
+package <%= packageName %>.<%= aggregateName %>.domain.model.aggregates;
+
+import <%= packageName %>.<%= aggregateName %>.domain.model.commands.Create<%= aggregateUpperName %>Command;
+import <%= packageName %>.<%= aggregateName %>.domain.model.valueobjects.<%= aggregateUpperName %>BaseInfo;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.domain.AbstractAggregateRoot;
+
+import javax.persistence.*;
+
+@Entity
+@NoArgsConstructor
+@Data
+@AllArgsConstructor
+public class <%= aggregateUpperName %> extends AbstractAggregateRoot<<%= aggregateUpperName %>> {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Embedded
+    private Create<%= aggregateUpperName %>Id create<%= aggregateUpperName %>Id;
+
+    @Embedded
+    private <%= aggregateUpperName %>BaseInfo <%= aggregateName %>BaseInfo;
+
+    public <%= aggregateUpperName %>(Create<%= aggregateUpperName %>Command create<%= aggregateUpperName %>Command) {
+    this.create<%= aggregateUpperName %>Id = new Create<%= aggregateUpperName %>Id(create<%= aggregateUpperName %>Command.get<%= aggregateUpperName %>Id());
+    this.<%= aggregateName %>BaseInfo = new <%= aggregateUpperName %>BaseInfo(create<%= aggregateUpperName %>Command.get<%= aggregateUpperName %>Name());
+    }
+}

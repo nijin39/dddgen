@@ -1,0 +1,13 @@
+package <%= packageName %>.<%= aggregateName %>.interfaces.rest.transform;
+
+import <%= packageName %>.<%= aggregateName %>.domain.model.commands.Create<%= aggregateUpperName %>Command;
+import <%= packageName %>.<%= aggregateName %>.interfaces.rest.dto.Create<%= aggregateUpperName %>Resource;
+
+public class Create<%= aggregateUpperName %>CommandDTOAssembler {
+
+    public static Create<%= aggregateUpperName %>Command toCommandFromDTO(Create<%= aggregateUpperName %>Resource create<%= aggregateUpperName %>Resource) {
+        return new Create<%= aggregateUpperName %>Command(
+            create<%= aggregateUpperName %>Resource.get<%= aggregateUpperName %>Name()
+        );
+    }
+}

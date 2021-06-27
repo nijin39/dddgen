@@ -1,0 +1,27 @@
+package <%= packageName %>.<%= aggregateName %>.application.internal.commandservices;
+
+import <%= packageName %>.<%= aggregateName %>.domain.model.aggregates.Create<%= aggregateUpperName %>Id;
+import <%= packageName %>.<%= aggregateName %>.domain.model.commands.Create<%= aggregateUpperName %>Command;
+import <%= packageName %>.<%= aggregateName %>.domain.model.aggregates.<%= aggregateUpperName %>;
+import <%= packageName %>.<%= aggregateName %>.domain.service.<%= aggregateUpperName %>Repository;
+import org.springframework.stereotype.Service;
+
+import java.util.UUID;
+
+@Service
+public class <%= aggregateUpperName %>CommandService {
+
+    private <%= aggregateUpperName %>Repository <%= aggregateName %>Repository;
+
+    public <%= aggregateUpperName %>CommandService(<%= aggregateUpperName %>Repository <%= aggregateName %>Repository) {
+        this.<%= aggregateName %>Repository = <%= aggregateName %>Repository;
+    }
+
+    public Create<%= aggregateUpperName %>Id create<%= aggregateUpperName %>(Create<%= aggregateUpperName %>Command create<%= aggregateUpperName %>Command) {
+        String random = UUID.randomUUID().toString().toUpperCase();
+        create<%= aggregateUpperName %>Command.set<%= aggregateUpperName %>Id(random.substring(0, random.indexOf("-")));
+        <%= aggregateUpperName %> <%= aggregateName %> = new <%= aggregateUpperName %>(create<%= aggregateUpperName %>Command);
+        <%= aggregateName %>Repository.save(<%= aggregateName %>);
+        return new Create<%= aggregateUpperName %>Id(random);
+    }
+}

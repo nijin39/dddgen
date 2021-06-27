@@ -1,0 +1,18 @@
+package <%= packageName %>.<%= aggregateName %>.domain.model.valueobjects;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Embeddable
+public class <%= aggregateUpperName %>BaseInfo {
+
+    @Column(name = "<%= aggregateName %>_name", unique = true, updatable= true)
+    private String <%= aggregateName %>Name;
+}

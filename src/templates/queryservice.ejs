@@ -1,0 +1,31 @@
+package <%= packageName %>.<%= aggregateName %>.application.internal.queryservices;
+
+import <%= packageName %>.<%= aggregateName %>.domain.model.aggregates.<%= aggregateUpperName %>;
+import <%= packageName %>.<%= aggregateName %>.domain.service.<%= aggregateUpperName %>Repository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class <%= aggregateUpperName %>QueryService {
+
+    private <%= aggregateUpperName %>Repository <%= aggregateName %>Repository;
+    
+    public <%= aggregateUpperName %>QueryService(<%= aggregateUpperName %>Repository <%= aggregateName %>Repository) {
+        this.<%= aggregateName %>Repository = <%= aggregateName %>Repository;
+    }
+    
+    public <%= aggregateUpperName %> findByCreate<%= aggregateUpperName %>Id(String create<%= aggregateUpperName %>Id) throws Exception {
+        Optional<<%= aggregateUpperName %>> <%= aggregateName %> = <%= aggregateName %>Repository.findByCreate<%= aggregateUpperName %>IdCreate<%= aggregateUpperName %>Id(create<%= aggregateUpperName %>Id);
+        if(!<%= aggregateName %>.isEmpty()) {
+            return <%= aggregateName %>.get();
+        } else {
+            throw new Exception("<%= aggregateUpperName %> is not exist!!");
+        }
+    }
+    
+    public List<<%= aggregateUpperName %>> findAll() {
+        return <%= aggregateName %>Repository.findAll();
+    }
+}

@@ -1,0 +1,12 @@
+package <%= packageName %>.<%= aggregateName %>.domain.service;
+
+import <%= packageName %>.<%= aggregateName %>.domain.model.aggregates.<%= aggregateUpperName %>;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface <%= aggregateUpperName %>Repository {
+    <%= aggregateUpperName %> save(<%= aggregateUpperName %> <%= aggregateName %>);
+    Optional<<%= aggregateUpperName %>> findByCreate<%= aggregateUpperName %>IdCreate<%= aggregateUpperName %>Id(String create<%= aggregateUpperName %>Id);
+    List<<%= aggregateUpperName %>> findAll();
+}
