@@ -1,6 +1,6 @@
 {
   "name": "@tandem6/dddgen",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "",
   "main": "./src/index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "Code Generator",
     "DDD"
   ],
-  "author": "tandem6",
+  "author": "rex",
   "license": "ISC",
   "dependencies": {
     "commander": "^8.0.0",

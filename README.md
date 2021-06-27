@@ -3,7 +3,7 @@
 Generated using [dddgen-cli](https://www.npmjs.com/package/@tandem6/dddgen):
 ```shell
 $ npm i -g @tandem6/dddgen
-$ dddgen [aggregate-name]
+$ dddgen -p com.tandem6.allsport -a team,player,league
 ```
 
 ## Installation
@@ -16,6 +16,8 @@ $ npm i -g @tandem6/dddgen
 Note: add `--save` if you are using npm < 5.0.0
 
 ## Usage
+
+You must run this command in the src upper folder.
 
 ```javascript
 dddgen --help
@@ -43,7 +45,14 @@ DDD is very helpful in developing MSA. But studying DDD takes a lot of time and 
 * Base CRUD Operation
 
 ## Release Note
-
-* 0.0.1.beta
+* 0.0.4
+  * warning fix
+  * typo fix
+  * Promise reject method add
+* 0.0.3
+  * Readme.md modified
+* 0.0.2
+  * Readme.md modified
+* 0.0.1
   * cli option add(using commander)
   * git repository add

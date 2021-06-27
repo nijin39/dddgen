@@ -39,7 +39,11 @@ function generateComponent(packageName, aggregateName, aggregateUpperName, baseF
 
         if (!fs.existsSync(filename)) {
             fs.writeFile(filename, generatedComponent, 'utf8', function (error) {
-                console.log(`${filename} write end`);
+                if(!error){
+                    console.log(`${filename} write end`);
+                } else {
+                    console.error(`${filename} write error`)
+                }
             });
         } else {
             console.log('File already exists!!!');
@@ -52,58 +56,67 @@ async function generateFiles(packageName, aggregateName, baseFolder) {
     const aggregateUpperName = aggregateName.replace(/\w/, c => c.toUpperCase());
 
     return new Promise(function(resolve, reject) {
-        generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'controller');
-        generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'commandservice');
-        generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'queryservice');
-        generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'assembler');
-        generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'dto');
-        generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'entity');
-        generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'createid');
-        generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'createcommand');
-        generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'valueobject');
-        generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'repository');
-        generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'jparepository');
-        return resolve(true);
+        try {
+            generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'controller');
+            generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'commandservice');
+            generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'queryservice');
+            generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'assembler');
+            generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'dto');
+            generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'entity');
+            generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'createid');
+            generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'createcommand');
+            generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'valueobject');
+            generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'repository');
+            generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'jparepository');
+            resolve(true);
+        } catch (e) {
+            reject(e.message);
+        }
+
     });
 }
 
 function createFolders(packageName, aggregateName) {
     return new Promise(function(resolve, reject) {
-        makeFolder('./src/main');
-        makeFolder('./src/main/java');
+        try {
+            makeFolder('./src/main');
+            makeFolder('./src/main/java');
 
-        let packageLayer = packageName.split('.');
-        let folderName = new Array();
-        packageLayer.forEach(package => {
-            folderName.push(package);
-            makeFolder(`./src/main/java/${folderName.join('/')}`)
-        });
+            let packageLayer = packageName.split('.');
+            let folderName = [];
+            packageLayer.forEach(packageName => {
+                folderName.push(packageName);
+                makeFolder(`./src/main/java/${folderName.join('/')}`)
+            });
 
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/interfaces`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/interfaces/rest`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/interfaces/rest/transform`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/interfaces/rest/dto`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/interfaces/events`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/application`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/application/internal`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/application/internal/commandservices`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/application/internal/queryservices`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/application/internal/outboundservices`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/domain`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/domain/model`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/domain/model/aggregates`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/domain/model/commands`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/domain/model/events`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/domain/model/entities`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/domain/model/valueobjects`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/domain/service`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/infrastructure`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/infrastructure/brokers`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/infrastructure/brokers/kafka`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/infrastructure/repositories`);
-        makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/infrastructure/repositories/jpa`);
-        resolve(`./src/main/java/${folderName.join('/')}/${aggregateName}`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/interfaces`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/interfaces/rest`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/interfaces/rest/transform`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/interfaces/rest/dto`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/interfaces/events`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/application`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/application/internal`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/application/internal/commandservices`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/application/internal/queryservices`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/application/internal/outboundservices`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/domain`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/domain/model`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/domain/model/aggregates`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/domain/model/commands`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/domain/model/events`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/domain/model/entities`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/domain/model/valueobjects`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/domain/service`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/infrastructure`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/infrastructure/brokers`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/infrastructure/brokers/kafka`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/infrastructure/repositories`);
+            makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/infrastructure/repositories/jpa`);
+            resolve(`./src/main/java/${folderName.join('/')}/${aggregateName}`);
+        } catch (e) {
+            reject(e.message);
+        }
     });
 }
 

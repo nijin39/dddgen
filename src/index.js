@@ -10,7 +10,7 @@ program
     .option('-a, --aggregate <aggregates...>', 'aggregate name comma separated list', commaSeparatedList)
     .parse();
 
-function commaSeparatedList(value, dummyPrevious) {
+function commaSeparatedList(value) {
     return value.split(',');
 }
 
