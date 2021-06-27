@@ -6,8 +6,8 @@ const generateDirectory = require('./generate-structure');
 const { program } = require('commander');
 program
     .version('0.0.1')
-    .option('-p, --package <package>', 'package name')
-    .option('-a, --aggregate <aggregates...>', 'aggregate name comma separated list', commaSeparatedList)
+    .requiredOption('-p, --package <package>', 'package name')
+    .requiredOption('-a, --aggregate <aggregates...>', 'aggregate name comma separated list', commaSeparatedList)
     .parse();
 
 function commaSeparatedList(value) {
@@ -26,11 +26,11 @@ async function main() {
     const options = program.opts();
 
     if (fs.existsSync("./src")) {
-        console.log("코드를 만들도록 하겠습니다.");
+        console.log("Let's generate a code!!!");
         await createFolderStructure(options.aggregate, options.package);
 
     } else {
-        console.error("src 상위 폴더에서 명령을 실행해주세요...");
+        console.error('You have to run this command in the parent folder of "src".');
     }
 }
 

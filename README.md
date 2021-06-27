@@ -45,6 +45,12 @@ DDD is very helpful in developing MSA. But studying DDD takes a lot of time and 
 * Base CRUD Operation
 
 ## Release Note
+* 0.0.6
+  * Error sentence change to english
+  * required option apply
+  * README.md modified
+* 0.0.5
+  * .npmignore add
 * 0.0.4
   * warning fix
   * typo fix
