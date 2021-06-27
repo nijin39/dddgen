@@ -14,6 +14,10 @@
     "Code Generator",
     "DDD"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nijin39/dddgen.git"
+  },
   "author": "rex",
   "license": "ISC",
   "dependencies": {
