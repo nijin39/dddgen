@@ -19,7 +19,7 @@ Note: add `--save` if you are using npm < 5.0.0
 
 You must run this command in the src upper folder.
 
-```javascript
+```shell
 dddgen --help
 Usage: index [options]
 
