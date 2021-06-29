@@ -32,8 +32,29 @@ Options:
 
 ## Example
 
+### Spring Boot Project Download
+
 ```shell
-dddgen -p com.tandem6.allsport -a team,player,league
+# curl -s https://start.spring.io/starter.zip -o coffeeshop.zip \                                                                          15:38:53
+-d type=gradle-project \
+-d language=java \
+-d bootVersion=2.5.2.RELEASE \
+-d baseDir=coffeeshop \
+-d groupId=com.tandem6 \
+-d artifactId=coffeeshop \
+-d name=coffeeshop \
+-d description=Demo%20project%20for%20Spring%20Boot \
+-d packageName=com.tandem6.coffeeshop \
+-d packaging=jar \
+-d javaVersion=11 \
+-d dependencies=web,data-jpa,h2,actuator,lombok,validation
+# unzip coffeeshop
+```
+
+### Code Generation
+```shell
+# cd coffeeshop
+# dddgen -p com.tandem6.coffeeshop -a product,coupon,payment,order
 ```
 
 ## Why DDDGen?
