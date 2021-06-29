@@ -5,7 +5,7 @@ const generateDirectory = require('./generate-structure');
 
 const { program } = require('commander');
 program
-    .version('0.0.1')
+    .version('0.0.8')
     .requiredOption('-p, --package <package>', 'package name')
     .requiredOption('-a, --aggregate <aggregates...>', 'aggregate name comma separated list', commaSeparatedList)
     .parse();
@@ -34,4 +34,4 @@ async function main() {
     }
 }
 
-main().then(() => console.log("Success!!!"));
+main().then(() => console.log("Finished....!!!"));

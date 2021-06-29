@@ -5,10 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Create<%= aggregateUpperName %>Resource {
-private String <%= aggregateName %>Name;
+    @NotBlank(message = "please, <%= aggregateUpperName %> Name input")
+    private String <%= aggregateName %>Name;
 }

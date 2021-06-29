@@ -14,17 +14,18 @@ function generateComponent(packageName, aggregateName, aggregateUpperName, baseF
     const componentUpperName = componentName.replace(/\w/, c => c.toUpperCase());
 
     let componentMap = new Map([
-        ['controller', `${baseFolder}/interfaces/rest/${aggregateUpperName}RestController.java`],
-        ['commandservice', `${baseFolder}/application/internal/commandservices/${aggregateUpperName}CommandService.java`],
-        ['queryservice', `${baseFolder}/application/internal/queryservices/${aggregateUpperName}QueryService.java`],
-        ['assembler', `${baseFolder}/interfaces/rest/transform/Create${aggregateUpperName}CommandDTO${componentUpperName}.java`],
-        ['dto', `${baseFolder}/interfaces/rest/dto/Create${aggregateUpperName}Resource.java`],
-        ['entity', `${baseFolder}/domain/model/aggregates/${aggregateUpperName}.java`],
-        ['createid', `${baseFolder}/domain/model/aggregates/Create${aggregateUpperName}Id.java`],
-        ['createcommand', `${baseFolder}/domain/model/commands/Create${aggregateUpperName}Command.java`],
-        ['valueobject', `${baseFolder}/domain/model/valueobjects/${aggregateUpperName}BaseInfo.java`],
-        ['repository', `${baseFolder}/domain/service/${aggregateUpperName}Repository.java`],
-        ['jparepository', `${baseFolder}/infrastructure/repositories/jpa/${aggregateUpperName}JPARepository.java`]
+        ['controller', `${baseFolder}/${aggregateName}/interfaces/rest/${aggregateUpperName}RestController.java`],
+        ['commandservice', `${baseFolder}/${aggregateName}/application/internal/commandservices/${aggregateUpperName}CommandService.java`],
+        ['queryservice', `${baseFolder}/${aggregateName}/application/internal/queryservices/${aggregateUpperName}QueryService.java`],
+        ['assembler', `${baseFolder}/${aggregateName}/interfaces/rest/transform/Create${aggregateUpperName}CommandDTO${componentUpperName}.java`],
+        ['dto', `${baseFolder}/${aggregateName}/interfaces/rest/dto/Create${aggregateUpperName}Resource.java`],
+        ['entity', `${baseFolder}/${aggregateName}/domain/model/aggregates/${aggregateUpperName}.java`],
+        ['createid', `${baseFolder}/${aggregateName}/domain/model/aggregates/Create${aggregateUpperName}Id.java`],
+        ['createcommand', `${baseFolder}/${aggregateName}/domain/model/commands/Create${aggregateUpperName}Command.java`],
+        ['valueobject', `${baseFolder}/${aggregateName}/domain/model/valueobjects/${aggregateUpperName}BaseInfo.java`],
+        ['repository', `${baseFolder}/${aggregateName}/domain/service/${aggregateUpperName}Repository.java`],
+        ['jparepository', `${baseFolder}/${aggregateName}/infrastructure/repositories/jpa/${aggregateUpperName}JPARepository.java`],
+        ['apiControllerAdvice', `${baseFolder}/config/ApiControllerAdvice.java`],
     ]);
 
     fs.readFile(__dirname + `/templates/${componentName}.ejs`, 'utf8', function (err, data) {
@@ -68,6 +69,7 @@ async function generateFiles(packageName, aggregateName, baseFolder) {
             generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'valueobject');
             generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'repository');
             generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'jparepository');
+            generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'apiControllerAdvice');
             resolve(true);
         } catch (e) {
             reject(e.message);
@@ -89,6 +91,7 @@ function createFolders(packageName, aggregateName) {
                 makeFolder(`./src/main/java/${folderName.join('/')}`)
             });
 
+            makeFolder(`./src/main/java/${folderName.join('/')}/config`);
             makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}`);
             makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/interfaces`);
             makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/interfaces/rest`);
@@ -113,7 +116,7 @@ function createFolders(packageName, aggregateName) {
             makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/infrastructure/brokers/kafka`);
             makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/infrastructure/repositories`);
             makeFolder(`./src/main/java/${folderName.join('/')}/${aggregateName}/infrastructure/repositories/jpa`);
-            resolve(`./src/main/java/${folderName.join('/')}/${aggregateName}`);
+            resolve(`./src/main/java/${folderName.join('/')}`);
         } catch (e) {
             reject(e.message);
         }

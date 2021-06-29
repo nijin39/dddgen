@@ -66,6 +66,9 @@ DDD is very helpful in developing MSA. But studying DDD takes a lot of time and 
 * Base CRUD Operation
 
 ## Release Note
+* 0.0.9
+  * JSR-380 apply
+  * controller advice apply
 * 0.0.8
   * Spring Project Creation using CURL
   * update README.md

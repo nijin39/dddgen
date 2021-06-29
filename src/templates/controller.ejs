@@ -9,6 +9,7 @@ import <%= packageName %>.<%= aggregateName %>.interfaces.rest.transform.Create<
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
@@ -24,7 +25,7 @@ public class <%= aggregateUpperName %>RestController {
     }
 
     @PostMapping("/<%= aggregateName %>")
-    public Create<%= aggregateUpperName %>Id create<%= aggregateUpperName %>(@RequestBody Create<%= aggregateUpperName %>Resource create<%= aggregateUpperName %>Resource) {
+    public Create<%= aggregateUpperName %>Id create<%= aggregateUpperName %>(@Valid @RequestBody Create<%= aggregateUpperName %>Resource create<%= aggregateUpperName %>Resource) {
         Create<%= aggregateUpperName %>Id create<%= aggregateUpperName %>Id = <%= aggregateName %>CommandService.create<%= aggregateUpperName %>(
         Create<%= aggregateUpperName %>CommandDTOAssembler.toCommandFromDTO(create<%= aggregateUpperName %>Resource));
         return create<%= aggregateUpperName %>Id;

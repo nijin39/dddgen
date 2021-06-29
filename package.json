@@ -12,7 +12,11 @@
   "keywords": [
     "Domain Driven Design",
     "Code Generator",
-    "DDD"
+    "DDD",
+    "Domain",
+    "Driven",
+    "Design",
+    "boilerplate"
   ],
   "repository": {
     "type": "git",
