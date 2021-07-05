@@ -66,6 +66,9 @@ DDD is very helpful in developing MSA. But studying DDD takes a lot of time and 
 * Base CRUD Operation
 
 ## Release Note
+* 0.0.11
+  * Return 201 when resource created
+  * MockMvc, mockito apply
 * 0.0.9
   * JSR-380 apply
   * controller advice apply
