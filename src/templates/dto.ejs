@@ -1,5 +1,6 @@
 package <%= packageName %>.<%= aggregateName %>.interfaces.rest.dto;
 
+import <%= packageName %>.<%= aggregateName %>.interfaces.rest.validation.Phone;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,4 +15,7 @@ import javax.validation.constraints.NotBlank;
 public class Create<%= aggregateUpperName %>Resource {
     @NotBlank(message = "please, <%= aggregateUpperName %> Name input")
     private String <%= aggregateName %>Name;
+
+    @Phone
+    private String phone;
 }

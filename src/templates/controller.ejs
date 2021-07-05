@@ -7,9 +7,12 @@ import <%= packageName %>.<%= aggregateName %>.domain.model.aggregates.<%= aggre
 import <%= packageName %>.<%= aggregateName %>.interfaces.rest.dto.Create<%= aggregateUpperName %>Resource;
 import <%= packageName %>.<%= aggregateName %>.interfaces.rest.transform.Create<%= aggregateUpperName %>CommandDTOAssembler;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @Slf4j
@@ -25,10 +28,15 @@ public class <%= aggregateUpperName %>RestController {
     }
 
     @PostMapping("/<%= aggregateName %>")
-    public Create<%= aggregateUpperName %>Id create<%= aggregateUpperName %>(@Valid @RequestBody Create<%= aggregateUpperName %>Resource create<%= aggregateUpperName %>Resource) {
+    public ResponseEntity<Create<%= aggregateUpperName %>Id> create<%= aggregateUpperName %>(@Valid @RequestBody Create<%= aggregateUpperName %>Resource create<%= aggregateUpperName %>Resource) {
         Create<%= aggregateUpperName %>Id create<%= aggregateUpperName %>Id = <%= aggregateName %>CommandService.create<%= aggregateUpperName %>(
         Create<%= aggregateUpperName %>CommandDTOAssembler.toCommandFromDTO(create<%= aggregateUpperName %>Resource));
-        return create<%= aggregateUpperName %>Id;
+        final URI uri =
+            MvcUriComponentsBuilder.fromController(getClass())
+            .path("/{id}")
+            .buildAndExpand(create<%= aggregateUpperName %>Id.getCreate<%= aggregateUpperName %>Id())
+            .toUri();
+        return ResponseEntity.created(uri).body(create<%= aggregateUpperName %>Id);
     }
 
     @GetMapping("/<%= aggregateName %>")

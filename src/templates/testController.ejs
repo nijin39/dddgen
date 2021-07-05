@@ -1,0 +1,115 @@
+package <%= packageName %>.<%= aggregateName %>.interfaces.rest;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import <%= packageName %>.<%= aggregateName %>.application.internal.commandservices.<%= aggregateUpperName %>CommandService;
+import <%= packageName %>.<%= aggregateName %>.application.internal.queryservices.<%= aggregateUpperName %>QueryService;
+import <%= packageName %>.<%= aggregateName %>.domain.model.aggregates.Create<%= aggregateUpperName %>Id;
+import <%= packageName %>.<%= aggregateName %>.interfaces.rest.dto.Create<%= aggregateUpperName %>Resource;
+import <%= packageName %>.<%= aggregateName %>.interfaces.rest.transform.Create<%= aggregateUpperName %>CommandDTOAssembler;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.core.annotation.Order;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@WebMvcTest(<%= aggregateUpperName %>RestController.class)
+class <%= aggregateUpperName %>RestControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
+    private <%= aggregateUpperName %>CommandService <%= aggregateName %>CommandService;
+
+    @MockBean
+    private <%= aggregateUpperName %>QueryService <%= aggregateName %>QueryService;
+
+
+    @Test
+    @Order(1)
+    @DisplayName("<%= aggregateName %>Name number and phone are abnormal")
+    void create<%= aggregateUpperName %>_AllAbnormal() throws Exception {
+        mockMvc.perform( MockMvcRequestBuilders
+        .post("/<%= aggregateName %>")
+        .content(asJsonString(new Create<%= aggregateUpperName %>Resource(null, "010-9652-4489")))
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isBadRequest())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.phone").exists())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.<%= aggregateName %>Name").exists());
+    }
+
+    @Test
+    @Order(2)
+    @DisplayName("Phone number is abnormal")
+    void create<%= aggregateUpperName %>_phoneAbnormal() throws Exception {
+        mockMvc.perform( MockMvcRequestBuilders
+        .post("/<%= aggregateName %>")
+        .content(asJsonString(new Create<%= aggregateUpperName %>Resource("mac book", "010-9652-4489")))
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isBadRequest())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.phone").exists());
+    }
+
+    @Test
+    @Order(3)
+    @DisplayName("<%= aggregateName %>Name is abnormal")
+    void create<%= aggregateUpperName %>_<%= aggregateName %>NameAbnormal() throws Exception {
+        mockMvc.perform( MockMvcRequestBuilders
+        .post("/<%= aggregateName %>")
+        .content(asJsonString(new Create<%= aggregateUpperName %>Resource(null, "01096524489")))
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isBadRequest())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.<%= aggregateName %>Name").exists());
+    }
+
+    @Test
+    @Order(4)
+    @DisplayName("Create<%= aggregateUpperName %>Resource is normal")
+    void create<%= aggregateUpperName %>_normal() throws Exception {
+
+        //given
+        Create<%= aggregateUpperName %>Resource create<%= aggregateUpperName %>Resource = new Create<%= aggregateUpperName %>Resource("mac book", "01096524489");
+
+        when(<%= aggregateName %>CommandService.create<%= aggregateUpperName %>(Create<%= aggregateUpperName %>CommandDTOAssembler.toCommandFromDTO(create<%= aggregateUpperName %>Resource)))
+        .thenReturn(new Create<%= aggregateUpperName %>Id("1"));
+
+        //when&then
+        mockMvc.perform( MockMvcRequestBuilders
+        .post("/<%= aggregateName %>")
+        .content(asJsonString(new Create<%= aggregateUpperName %>Resource("mac book", "01096524489")))
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isCreated());
+    }
+
+    @Test
+    @Order(5)
+    void findByCreate<%= aggregateUpperName %>Id() {
+    }
+
+    @Test
+    @Order(6)
+    void getAll<%= aggregateUpperName %>s() {
+    }
+
+    public static String asJsonString(final Object obj) {
+        try {
+            final ObjectMapper mapper = new ObjectMapper();
+            final String jsonContent = mapper.writeValueAsString(obj);
+            return jsonContent;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+}

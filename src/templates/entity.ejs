@@ -4,6 +4,7 @@ import <%= packageName %>.<%= aggregateName %>.domain.model.commands.Create<%= a
 import <%= packageName %>.<%= aggregateName %>.domain.model.valueobjects.<%= aggregateUpperName %>BaseInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.AbstractAggregateRoot;
 
@@ -12,6 +13,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @Data
+@EqualsAndHashCode(callSuper=false)
 @AllArgsConstructor
 public class <%= aggregateUpperName %> extends AbstractAggregateRoot<<%= aggregateUpperName %>> {
 
