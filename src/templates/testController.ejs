@@ -38,13 +38,13 @@ class <%= aggregateUpperName %>RestControllerTest {
     @DisplayName("<%= aggregateName %>Name number and phone are abnormal")
     void create<%= aggregateUpperName %>_AllAbnormal() throws Exception {
         mockMvc.perform( MockMvcRequestBuilders
-        .post("/<%= aggregateName %>")
-        .content(asJsonString(new Create<%= aggregateUpperName %>Resource(null, "010-9652-4489")))
-        .contentType(MediaType.APPLICATION_JSON)
-        .accept(MediaType.APPLICATION_JSON))
-        .andExpect(status().isBadRequest())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.phone").exists())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.<%= aggregateName %>Name").exists());
+            .post("/<%= aggregateName %>")
+            .content(asJsonString(new Create<%= aggregateUpperName %>Resource(null, "010-9652-4489")))
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isBadRequest())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.phone").exists())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.<%= aggregateName %>Name").exists());
     }
 
     @Test
@@ -52,12 +52,12 @@ class <%= aggregateUpperName %>RestControllerTest {
     @DisplayName("Phone number is abnormal")
     void create<%= aggregateUpperName %>_phoneAbnormal() throws Exception {
         mockMvc.perform( MockMvcRequestBuilders
-        .post("/<%= aggregateName %>")
-        .content(asJsonString(new Create<%= aggregateUpperName %>Resource("mac book", "010-9652-4489")))
-        .contentType(MediaType.APPLICATION_JSON)
-        .accept(MediaType.APPLICATION_JSON))
-        .andExpect(status().isBadRequest())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.phone").exists());
+            .post("/<%= aggregateName %>")
+            .content(asJsonString(new Create<%= aggregateUpperName %>Resource("mac book", "010-9652-4489")))
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isBadRequest())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.phone").exists());
     }
 
     @Test
@@ -65,12 +65,12 @@ class <%= aggregateUpperName %>RestControllerTest {
     @DisplayName("<%= aggregateName %>Name is abnormal")
     void create<%= aggregateUpperName %>_<%= aggregateName %>NameAbnormal() throws Exception {
         mockMvc.perform( MockMvcRequestBuilders
-        .post("/<%= aggregateName %>")
-        .content(asJsonString(new Create<%= aggregateUpperName %>Resource(null, "01096524489")))
-        .contentType(MediaType.APPLICATION_JSON)
-        .accept(MediaType.APPLICATION_JSON))
-        .andExpect(status().isBadRequest())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.<%= aggregateName %>Name").exists());
+            .post("/<%= aggregateName %>")
+            .content(asJsonString(new Create<%= aggregateUpperName %>Resource(null, "01096524489")))
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isBadRequest())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.<%= aggregateName %>Name").exists());
     }
 
     @Test
@@ -86,11 +86,11 @@ class <%= aggregateUpperName %>RestControllerTest {
 
         //when&then
         mockMvc.perform( MockMvcRequestBuilders
-        .post("/<%= aggregateName %>")
-        .content(asJsonString(new Create<%= aggregateUpperName %>Resource("mac book", "01096524489")))
-        .contentType(MediaType.APPLICATION_JSON)
-        .accept(MediaType.APPLICATION_JSON))
-        .andExpect(status().isCreated());
+            .post("/<%= aggregateName %>")
+            .content(asJsonString(new Create<%= aggregateUpperName %>Resource("mac book", "01096524489")))
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isCreated());
     }
 
     @Test
