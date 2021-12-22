@@ -5,7 +5,7 @@ const generateDirectory = require('./generate-structure');
 
 const { program } = require('commander');
 program
-    .version('0.0.8')
+    .version('0.1.0')
     .requiredOption('-p, --package <package>', 'package name')
     .requiredOption('-a, --aggregate <aggregates...>', 'aggregate name comma separated list', commaSeparatedList)
     .parse();
