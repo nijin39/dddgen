@@ -57,8 +57,8 @@ Options:
 ### build.gradle add dependency
 
 ```shell
-	implementation 'io.springfox:springfox-swagger2:2.9.2'
-  implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+implementation 'io.springfox:springfox-swagger2:2.9.2'
+implementation 'io.springfox:springfox-swagger-ui:2.9.2'
 ```
 
 ### Code Generation
@@ -75,6 +75,7 @@ DDD is very helpful in developing MSA. But studying DDD takes a lot of time and 
 - Clean Architecture
 - DDD Tactical Pattern
 - Base CRUD Operation
+- Restful API Document Automation(Swagger)
 
 ## Release Note
 
