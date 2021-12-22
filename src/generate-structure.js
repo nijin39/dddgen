@@ -29,6 +29,7 @@ function generateComponent(packageName, aggregateName, aggregateUpperName, baseF
         ['repository', `${baseFolder}/${aggregateName}/domain/service/${aggregateUpperName}Repository.java`],
         ['jparepository', `${baseFolder}/${aggregateName}/infrastructure/repositories/jpa/${aggregateUpperName}JPARepository.java`],
         ['apiControllerAdvice', `${baseFolder}/config/ApiControllerAdvice.java`],
+        ['swaggerConfigure', `${baseFolder}/config/SwaggerConfig.java`]
     ]);
 
     fs.readFile(__dirname + `/templates/${componentName}.ejs`, 'utf8', function (err, data) {
@@ -75,6 +76,7 @@ async function generateSourceFiles(packageName, aggregateName, baseFolder) {
             generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'apiControllerAdvice');
             generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'annotation');
             generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'validator');
+            generateComponent(packageName, aggregateName, aggregateUpperName, baseFolder, 'swaggerConfigure');
             resolve(true);
         } catch (e) {
             reject(e.message);
