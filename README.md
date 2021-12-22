@@ -78,6 +78,8 @@ DDD is very helpful in developing MSA. But studying DDD takes a lot of time and 
 
 ## Release Note
 
+- 0.1.0
+  - Swagger UI Document configure add
 - 0.0.11
   - Return 201 when resource created
   - MockMvc, mockito apply
