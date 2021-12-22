@@ -1,6 +1,7 @@
 # DDD Generator
 
 Generated using [dddgen-cli](https://www.npmjs.com/package/@tandem6/dddgen):
+
 ```shell
 $ npm i -g @tandem6/dddgen
 $ dddgen -p com.tandem6.allsport -a team,player,league
@@ -9,10 +10,12 @@ $ dddgen -p com.tandem6.allsport -a team,player,league
 ## Installation
 
 Using npm:
+
 ```shell
 $ npm i -g npm
 $ npm i -g @tandem6/dddgen
 ```
+
 Note: add `--save` if you are using npm < 5.0.0
 
 ## Usage
@@ -35,7 +38,7 @@ Options:
 ### Spring Boot Project Download
 
 ```shell
-# curl -s https://start.spring.io/starter.zip -o coffeeshop.zip \                                                                          15:38:53
+# curl -s https://start.spring.io/starter.zip -o coffeeshop.zip \
 -d type=gradle-project \
 -d language=java \
 -d bootVersion=2.5.2.RELEASE \
@@ -51,7 +54,15 @@ Options:
 # unzip coffeeshop
 ```
 
+### build.gradle add dependency
+
+```shell
+	implementation 'io.springfox:springfox-swagger2:2.9.2'
+  implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+```
+
 ### Code Generation
+
 ```shell
 # cd coffeeshop
 # dddgen -p com.tandem6.coffeeshop -a product,coupon,payment
@@ -61,34 +72,35 @@ Options:
 
 DDD is very helpful in developing MSA. But studying DDD takes a lot of time and there is no set style. Therefore, it can give a lot of difficulty when many people create a project together. DDDGen automatically creates a package with its know-how to solve these problems to some extent.
 
-* Clean Architecture
-* DDD Tactical Pattern
-* Base CRUD Operation
+- Clean Architecture
+- DDD Tactical Pattern
+- Base CRUD Operation
 
 ## Release Note
-* 0.0.11
-  * Return 201 when resource created
-  * MockMvc, mockito apply
-* 0.0.9
-  * JSR-380 apply
-  * controller advice apply
-* 0.0.8
-  * Spring Project Creation using CURL
-  * update README.md
-* 0.0.6
-  * Error sentence change to english
-  * required option apply
-  * README.md modified
-* 0.0.5
-  * .npmignore add
-* 0.0.4
-  * warning fix
-  * typo fix
-  * Promise reject method add
-* 0.0.3
-  * Readme.md modified
-* 0.0.2
-  * Readme.md modified
-* 0.0.1
-  * cli option add(using commander)
-  * git repository add
+
+- 0.0.11
+  - Return 201 when resource created
+  - MockMvc, mockito apply
+- 0.0.9
+  - JSR-380 apply
+  - controller advice apply
+- 0.0.8
+  - Spring Project Creation using CURL
+  - update README.md
+- 0.0.6
+  - Error sentence change to english
+  - required option apply
+  - README.md modified
+- 0.0.5
+  - .npmignore add
+- 0.0.4
+  - warning fix
+  - typo fix
+  - Promise reject method add
+- 0.0.3
+  - Readme.md modified
+- 0.0.2
+  - Readme.md modified
+- 0.0.1
+  - cli option add(using commander)
+  - git repository add
