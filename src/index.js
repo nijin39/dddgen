@@ -35,22 +35,42 @@ function addDependency() {
     }
 
     const newDependencies = `
-        implementation 'io.springfox:springfox-swagger2:2.9.2'
-        implementation 'io.springfox:springfox-swagger-ui:2.9.2'
-    `;
+          implementation 'io.springfox:springfox-swagger2:3.0.0'
+          implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+      `;
 
-    const modifiedData = data.replace(
-      /dependencies\s*{([\s\S]*?)}/,
-      `dependencies {$1${newDependencies}}`
-    );
+    const dependenciesRegex = /dependencies\s*{([\s\S]*?)}/;
+    const hasDependencies = dependenciesRegex.test(data);
 
-    fs.writeFile(filePath, modifiedData, (err) => {
-      if (err) {
-        console.error("Failed to write the build.gradle file:", err);
+    if (hasDependencies) {
+      const dependenciesBlock = data.match(dependenciesRegex)[0];
+      const hasNewDependencies = newDependencies
+        .trim()
+        .split("\n")
+        .every((line) => dependenciesBlock.includes(line.trim()));
+
+      if (hasNewDependencies) {
+        console.log("The dependencies already exist in the build.gradle file.");
         return;
       }
-      console.log("build.gradle file has been updated successfully!");
-    });
+
+      const modifiedData = data.replace(
+        dependenciesRegex,
+        `dependencies {$1${newDependencies}}`
+      );
+
+      fs.writeFile(filePath, modifiedData, (err) => {
+        if (err) {
+          console.error("Failed to write the build.gradle file:", err);
+          return;
+        }
+        console.log("build.gradle file has been updated successfully!");
+      });
+    } else {
+      console.error(
+        "Failed to find the dependencies block in the build.gradle file."
+      );
+    }
   });
 }
 

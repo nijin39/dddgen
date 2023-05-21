@@ -71,6 +71,8 @@ DDD is very helpful in developing MSA. But studying DDD takes a lot of time and 
 - Restful API Document Automation(Swagger)
 
 ## Release Note
+- 0.1.4
+  - bug fix when add dependency
 - 0.1.3
   - change spring-boot version
 - 0.1.2
