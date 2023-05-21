@@ -41,7 +41,7 @@ Options:
 # curl -s https://start.spring.io/starter.zip -o coffeeshop.zip \
 -d type=gradle-project \
 -d language=java \
--d bootVersion=2.5.2.RELEASE \
+-d bootVersion=2.7.12.RELEASE \
 -d baseDir=coffeeshop \
 -d groupId=com.tandem6 \
 -d artifactId=coffeeshop \
@@ -74,6 +74,7 @@ DDD is very helpful in developing MSA. But studying DDD takes a lot of time and 
 - 0.1.2
   - add Dockerfile
   - Adding dependencies automatically
+  - change spring-boot version
 - 0.1.1
   - Document Update
 - 0.1.0
