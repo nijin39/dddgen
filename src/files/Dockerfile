@@ -1,5 +1,6 @@
 # Gradle Wrapper를 사용할 수 있는 Java 이미지 사용
-FROM --platform=linux/amd64 openjdk:11-jdk as build
+# FROM --platform=linux/amd64 openjdk:11-jdk as build
+FROM openjdk:11-jdk as build
 
 # 프로젝트 파일 복사
 COPY . /usr/src/app
@@ -8,7 +9,7 @@ COPY . /usr/src/app
 WORKDIR /usr/src/app
 
 # Gradle 빌드 실행
-RUN ./gradlew clean build
+RUN ./gradlew clean build --warning-mode all
 
 # 런타임 이미지 생성
 FROM openjdk:11-jdk
