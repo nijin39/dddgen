@@ -54,13 +54,6 @@ Options:
 # unzip coffeeshop
 ```
 
-### build.gradle add dependency
-
-```shell
-implementation 'io.springfox:springfox-swagger2:2.9.2'
-implementation 'io.springfox:springfox-swagger-ui:2.9.2'
-```
-
 ### Code Generation
 
 ```shell
@@ -78,7 +71,9 @@ DDD is very helpful in developing MSA. But studying DDD takes a lot of time and 
 - Restful API Document Automation(Swagger)
 
 ## Release Note
-
+- 0.1.2
+  - add Dockerfile
+  - Adding dependencies automatically
 - 0.1.1
   - Document Update
 - 0.1.0
